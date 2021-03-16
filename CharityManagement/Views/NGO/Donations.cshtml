@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CharityManagement.Models.Donation>
+
+@{
+    ViewBag.Title = "Donations";
+    Layout = "~/Views/Shared/_NGOLayout.cshtml";
+}
+
+<h2>Donations</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TransactionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Donar.DId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Donar.DName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.TransactionDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Amount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Donar.DId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Donar.DName)
+    </td>
+    <td>
+    </td>
+</tr>
+}
+
+</table>

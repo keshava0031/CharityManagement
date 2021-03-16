@@ -1,0 +1,73 @@
+﻿@model CharityManagement.Models.Donar
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_DonarLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Donar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoginDetail.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoginDetail.Password)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.DId }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>

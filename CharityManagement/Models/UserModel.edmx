@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Donar">
+          <Key>
+            <PropertyRef Name="DId" />
+          </Key>
+          <Property Name="DId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DName" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Donation">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DId" Type="varchar" MaxLength="20" />
+          <Property Name="NgId" Type="varchar" MaxLength="20" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="TransactionDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LoginDetails">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="25" />
+          <Property Name="LoginAs" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="NGO">
+          <Key>
+            <PropertyRef Name="NId" />
+          </Key>
+          <Property Name="NId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NgName" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Raisedonation">
+          <Key>
+            <PropertyRef Name="NId" />
+          </Key>
+          <Property Name="NId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Amount" Type="int" />
+        </EntityType>
+        <EntityType Name="Verification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="status" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__Donar__Username__534D60F1">
+          <End Role="LoginDetails" Type="Self.LoginDetails" Multiplicity="0..1" />
+          <End Role="Donar" Type="Self.Donar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginDetails">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Donar">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Donation__DId__59063A47">
+          <End Role="Donar" Type="Self.Donar" Multiplicity="0..1" />
+          <End Role="Donation" Type="Self.Donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donar">
+              <PropertyRef Name="DId" />
+            </Principal>
+            <Dependent Role="Donation">
+              <PropertyRef Name="DId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Donation__NgId__59FA5E80">
+          <End Role="NGO" Type="Self.NGO" Multiplicity="0..1" />
+          <End Role="Donation" Type="Self.Donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NId" />
+            </Principal>
+            <Dependent Role="Donation">
+              <PropertyRef Name="NgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NGO__Username__5070F446">
+          <End Role="LoginDetails" Type="Self.LoginDetails" Multiplicity="0..1" />
+          <End Role="NGO" Type="Self.NGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginDetails">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="NGO">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Raisedonati__NId__71D1E811">
+          <End Role="NGO" Type="Self.NGO" Multiplicity="1" />
+          <End Role="Raisedonation" Type="Self.Raisedonation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NId" />
+            </Principal>
+            <Dependent Role="Raisedonation">
+              <PropertyRef Name="NId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Verification__Id__5CD6CB2B">
+          <End Role="NGO" Type="Self.NGO" Multiplicity="1" />
+          <End Role="Verification" Type="Self.Verification" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NId" />
+            </Principal>
+            <Dependent Role="Verification">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRMModelStoreContainer">
+          <EntitySet Name="Donar" EntityType="Self.Donar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Donation" EntityType="Self.Donation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginDetails" EntityType="Self.LoginDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NGO" EntityType="Self.NGO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Raisedonation" EntityType="Self.Raisedonation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Verification" EntityType="Self.Verification" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Donar__Username__534D60F1" Association="Self.FK__Donar__Username__534D60F1">
+            <End Role="LoginDetails" EntitySet="LoginDetails" />
+            <End Role="Donar" EntitySet="Donar" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Donation__DId__59063A47" Association="Self.FK__Donation__DId__59063A47">
+            <End Role="Donar" EntitySet="Donar" />
+            <End Role="Donation" EntitySet="Donation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Donation__NgId__59FA5E80" Association="Self.FK__Donation__NgId__59FA5E80">
+            <End Role="NGO" EntitySet="NGO" />
+            <End Role="Donation" EntitySet="Donation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NGO__Username__5070F446" Association="Self.FK__NGO__Username__5070F446">
+            <End Role="LoginDetails" EntitySet="LoginDetails" />
+            <End Role="NGO" EntitySet="NGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Raisedonati__NId__71D1E811" Association="Self.FK__Raisedonati__NId__71D1E811">
+            <End Role="NGO" EntitySet="NGO" />
+            <End Role="Raisedonation" EntitySet="Raisedonation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Verification__Id__5CD6CB2B" Association="Self.FK__Verification__Id__5CD6CB2B">
+            <End Role="NGO" EntitySet="NGO" />
+            <End Role="Verification" EntitySet="Verification" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Donar">
+          <Key>
+            <PropertyRef Name="DId" />
+          </Key>
+          <Property Name="DId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LoginDetail" Relationship="Self.FK__Donar__Username__534D60F1" FromRole="Donar" ToRole="LoginDetails" />
+          <NavigationProperty Name="Donations" Relationship="Self.FK__Donation__DId__59063A47" FromRole="Donar" ToRole="Donation" />
+        </EntityType>
+        <EntityType Name="Donation">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NgId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Donar" Relationship="Self.FK__Donation__DId__59063A47" FromRole="Donation" ToRole="Donar" />
+          <NavigationProperty Name="NGO" Relationship="Self.FK__Donation__NgId__59FA5E80" FromRole="Donation" ToRole="NGO" />
+        </EntityType>
+        <EntityType Name="LoginDetail">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="LoginAs" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Donars" Relationship="Self.FK__Donar__Username__534D60F1" FromRole="LoginDetails" ToRole="Donar" />
+          <NavigationProperty Name="NGOes" Relationship="Self.FK__NGO__Username__5070F446" FromRole="LoginDetails" ToRole="NGO" />
+        </EntityType>
+        <EntityType Name="NGO">
+          <Key>
+            <PropertyRef Name="NId" />
+          </Key>
+          <Property Name="NId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Donations" Relationship="Self.FK__Donation__NgId__59FA5E80" FromRole="NGO" ToRole="Donation" />
+          <NavigationProperty Name="LoginDetail" Relationship="Self.FK__NGO__Username__5070F446" FromRole="NGO" ToRole="LoginDetails" />
+          <NavigationProperty Name="Verification" Relationship="Self.FK__Verification__Id__5CD6CB2B" FromRole="NGO" ToRole="Verification" />
+          <NavigationProperty Name="Raisedonation" Relationship="CRMModel.FK__Raisedonati__NId__71D1E811" FromRole="NGO" ToRole="Raisedonation" />
+        </EntityType>
+        <EntityType Name="Verification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NGO" Relationship="Self.FK__Verification__Id__5CD6CB2B" FromRole="Verification" ToRole="NGO" />
+        </EntityType>
+        <Association Name="FK__Donar__Username__534D60F1">
+          <End Role="LoginDetails" Type="Self.LoginDetail" Multiplicity="0..1" />
+          <End Role="Donar" Type="Self.Donar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginDetails">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Donar">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Donation__DId__59063A47">
+          <End Role="Donar" Type="Self.Donar" Multiplicity="0..1" />
+          <End Role="Donation" Type="Self.Donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donar">
+              <PropertyRef Name="DId" />
+            </Principal>
+            <Dependent Role="Donation">
+              <PropertyRef Name="DId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Donation__NgId__59FA5E80">
+          <End Role="NGO" Type="Self.NGO" Multiplicity="0..1" />
+          <End Role="Donation" Type="Self.Donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NId" />
+            </Principal>
+            <Dependent Role="Donation">
+              <PropertyRef Name="NgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NGO__Username__5070F446">
+          <End Role="LoginDetails" Type="Self.LoginDetail" Multiplicity="0..1" />
+          <End Role="NGO" Type="Self.NGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoginDetails">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="NGO">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Verification__Id__5CD6CB2B">
+          <End Role="NGO" Type="Self.NGO" Multiplicity="1" />
+          <End Role="Verification" Type="Self.Verification" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NId" />
+            </Principal>
+            <Dependent Role="Verification">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Donars" EntityType="Self.Donar" />
+          <EntitySet Name="Donations" EntityType="Self.Donation" />
+          <EntitySet Name="LoginDetails" EntityType="Self.LoginDetail" />
+          <EntitySet Name="NGOes" EntityType="Self.NGO" />
+          <EntitySet Name="Verifications" EntityType="Self.Verification" />
+          <AssociationSet Name="FK__Donar__Username__534D60F1" Association="Self.FK__Donar__Username__534D60F1">
+            <End Role="LoginDetails" EntitySet="LoginDetails" />
+            <End Role="Donar" EntitySet="Donars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Donation__DId__59063A47" Association="Self.FK__Donation__DId__59063A47">
+            <End Role="Donar" EntitySet="Donars" />
+            <End Role="Donation" EntitySet="Donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Donation__NgId__59FA5E80" Association="Self.FK__Donation__NgId__59FA5E80">
+            <End Role="NGO" EntitySet="NGOes" />
+            <End Role="Donation" EntitySet="Donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NGO__Username__5070F446" Association="Self.FK__NGO__Username__5070F446">
+            <End Role="LoginDetails" EntitySet="LoginDetails" />
+            <End Role="NGO" EntitySet="NGOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Verification__Id__5CD6CB2B" Association="Self.FK__Verification__Id__5CD6CB2B">
+            <End Role="NGO" EntitySet="NGOes" />
+            <End Role="Verification" EntitySet="Verifications" />
+          </AssociationSet>
+          <EntitySet Name="Raisedonations" EntityType="CRMModel.Raisedonation" />
+          <AssociationSet Name="FK__Raisedonati__NId__71D1E811" Association="CRMModel.FK__Raisedonati__NId__71D1E811">
+            <End Role="NGO" EntitySet="NGOes" />
+            <End Role="Raisedonation" EntitySet="Raisedonations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Raisedonation">
+          <Key>
+            <PropertyRef Name="NId" />
+          </Key>
+          <Property Name="NId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Int32" />
+          <NavigationProperty Name="NGO" Relationship="CRMModel.FK__Raisedonati__NId__71D1E811" FromRole="Raisedonation" ToRole="NGO" />
+        </EntityType>
+        <Association Name="FK__Raisedonati__NId__71D1E811">
+          <End Type="CRMModel.NGO" Role="NGO" Multiplicity="1" />
+          <End Type="CRMModel.Raisedonation" Role="Raisedonation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="NGO">
+              <PropertyRef Name="NId" />
+            </Principal>
+            <Dependent Role="Raisedonation">
+              <PropertyRef Name="NId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRMModelStoreContainer" CdmEntityContainer="CRMEntities">
+          <EntitySetMapping Name="Donars">
+            <EntityTypeMapping TypeName="CRMModel.Donar">
+              <MappingFragment StoreEntitySet="Donar">
+                <ScalarProperty Name="DId" ColumnName="DId" />
+                <ScalarProperty Name="DName" ColumnName="DName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Donations">
+            <EntityTypeMapping TypeName="CRMModel.Donation">
+              <MappingFragment StoreEntitySet="Donation">
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="DId" ColumnName="DId" />
+                <ScalarProperty Name="NgId" ColumnName="NgId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginDetails">
+            <EntityTypeMapping TypeName="CRMModel.LoginDetail">
+              <MappingFragment StoreEntitySet="LoginDetails">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginAs" ColumnName="LoginAs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NGOes">
+            <EntityTypeMapping TypeName="CRMModel.NGO">
+              <MappingFragment StoreEntitySet="NGO">
+                <ScalarProperty Name="NId" ColumnName="NId" />
+                <ScalarProperty Name="NgName" ColumnName="NgName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Verifications">
+            <EntityTypeMapping TypeName="CRMModel.Verification">
+              <MappingFragment StoreEntitySet="Verification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Raisedonations">
+            <EntityTypeMapping TypeName="CRMModel.Raisedonation">
+              <MappingFragment StoreEntitySet="Raisedonation">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="NId" ColumnName="NId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

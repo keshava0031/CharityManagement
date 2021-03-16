@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/navbar.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body>
+    <div class="sidebar-container">
+        <div class="sidebar-logo">
+            Charity Management<br/><h3>Donar</h3>
+        </div>
+        <ul class="sidebar-navigation">
+            <li class="header">Welcome, @TempData.Peek("Dname")</li>
+            <li>
+                @Html.ActionLink("Home", "Index", "Donar")
+            </li>
+            <li>
+                @Html.ActionLink("Donate", "Donate", "Donar")
+            </li>
+            <li class="fa fa-cog" aria-hidden="true">
+                @Html.ActionLink("NGOs", "NGODetail", "Donar")
+            </li>
+            <li>
+                @Html.ActionLink("Edit Profile", "Edit")
+            </li>
+            <li>
+                @Html.ActionLink("Profile", "Details", "Donar")
+            </li>
+            <li>
+                @Html.ActionLink("Logout", "Logout", "Login")
+            </li>
+        </ul>
+    </div>
+    <div class="content-container">
+
+        <div class="container-fluid">
+            <div class="jumbotron">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

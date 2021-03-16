@@ -1,0 +1,100 @@
+﻿@model CharityManagement.Models.LoginDetail
+
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <style>
+        body {
+            background: #b2adaa /*#44c4e7*/
+        }
+
+        .form {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            background: #fff;
+            width: 400px;
+            margin: -100px 50px 0 -200px; /*//140,182*/
+            padding: 50px;
+            border-radius: 30px 30px;
+            /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);*/
+        }
+    </style>
+</head>
+<body>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <section class="form animated flipInX">
+            <form id="form1">
+                <div>
+                    @*<h2>Charity Management</h2>*@
+                    <h3>Login To Your Account!</h3>
+                    <table>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </td>
+                            <td>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Login" class="btn btn-primary" />
+                            </div>
+                        </div>
+                        <div>
+                            <div class="glyphicon-align-center">
+                                @Html.ActionLink("Don't Have An Account? Register Here.", "Index", "Login")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+    }
+</body>
+</html>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+
+}
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e1ad7e4b53914533801404870f54f442" Name="Diagram1">
+        <EntityTypeShape EntityType="CRMModel.Donar" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Donation" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.LoginDetail" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.NGO" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Verification" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="CRMModel.FK__Donar__Username__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK__Donation__DId__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK__Donation__NgId__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK__NGO__Username__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK__Verification__Id__5CD6CB2B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CRMModel.Raisedonation" Width="1.5" PointX="5.25" PointY="8" />
+        <AssociationConnector Association="CRMModel.FK__Raisedonati__NId__71D1E811" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
